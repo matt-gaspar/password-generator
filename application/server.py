@@ -27,8 +27,7 @@ def passgen(length=15):
 def index():
     password = None
     form = GenerateForm()
-    if request.method == 'POST':
-        if form.validate():
-            password = passgen(form.length.data)
-            form.length.data = ''
+    if form.validate_on_submit():
+        password = passgen(form.length.data)
+        form.length.data = ''
     return render_template('index.html', form=form, password=password)
