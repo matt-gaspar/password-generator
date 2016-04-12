@@ -1,7 +1,6 @@
 from flask.ext.wtf import Form
-from wtforms import DecimalField, SubmitField, StringField
-from wtforms.validators import NumberRange
+from wtforms import DecimalField
+from wtforms.validators import NumberRange, Required
 
 class GenerateForm(Form):
-    length = DecimalField('Desired Password Length (minimum 10)',default=15, places=None, validators=[NumberRange(10)])
-    submit = SubmitField('Generate')
+    passlength = DecimalField('Desired Password Length (10 - 30)', default=15, places=None, validators=[NumberRange(10,30), Required()])

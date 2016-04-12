@@ -5,20 +5,17 @@ import random, string
 
 def getChars():
     excludes = app.config['EXCLUDE_CHARS']
-    letters = string.ascii_letters
-    digits = string.digits
     special = list(string.punctuation)
     for x in excludes:
         special.remove(x)
     special = "".join(special)
-    return [letters, digits, special]
+    return [string.ascii_lowercase,string.ascii_uppercase,string.digits, special]
 
-
-def passgen(length=15):
+def passgen(passlength=15):
     rnd = random.SystemRandom()
     charsets = getChars()
     pwd = []
-    while len(pwd) < length:
+    while len(pwd) < passlength:
         charset = rnd.choice(charsets)
         pwd.append(rnd.choice(charset))
     return "".join(pwd)
@@ -28,6 +25,5 @@ def index():
     password = None
     form = GenerateForm()
     if form.validate_on_submit():
-        password = passgen(form.length.data)
-        form.length.data = ''
+        password = passgen(form.passlength.data)
     return render_template('index.html', form=form, password=password)
