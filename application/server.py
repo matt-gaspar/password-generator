@@ -11,7 +11,7 @@ def getChars():
     special = "".join(special)
     return [string.ascii_lowercase,string.ascii_uppercase,string.digits, special]
 
-def passgen(passlength=15):
+def passgen(passlength):
     rnd = random.SystemRandom()
     charsets = getChars()
     pwd = []
