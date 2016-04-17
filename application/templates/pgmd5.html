@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<form action="" method="post" class="form" role="form">
+  {{ form.hidden_tag() }}
+  <div class="form-group">
+    {{ form.pguser.label }}
+  <div>
+    {{ form.pguser }}
+  </div>
+  <p class="text-danger">{{ form.pguser.errors[0] }}</p>
+  </div>
+  <div class="form-group">
+    {{ form.pgpass.label }}
+  <div>
+    {{ form.pgpass }}
+  </div>
+  <p class="text-danger">{{ form.pgpass.errors[0] }}</p>
+  </div>
+  <button class="btn btn-primary" type="submit">Generate Postgres MD5</button>
+</form>
+{% if pgmd5 %}
+  <div>
+    <h4>Generated Postgres MD5 Hash</h4>
+  </div>
+  <div>
+    <h4>{{ pgmd5 }}</h4>
+  </div>
+{% endif %}
+{% endblock %}
