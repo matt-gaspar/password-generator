@@ -1,7 +1,7 @@
 from application import app
 from flask import render_template, request
-from .forms import GenerateForm
-import random, string
+from .forms import GenerateForm, Pgmd5Form
+import random, string, hashlib
 
 def getChars():
     excludes = app.config['EXCLUDE_CHARS']
@@ -20,6 +20,9 @@ def passgen(passlength):
         pwd.append(rnd.choice(charset))
     return "".join(pwd)
 
+def pgmd5gen(pguser,pgpass):
+    return "md5" + hashlib.md5(pgpass.encode('utf-8') + pguser.encode('utf-8')).hexdigest()
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     password = None
@@ -27,3 +30,11 @@ def index():
     if form.validate_on_submit():
         password = passgen(form.passlength.data)
     return render_template('index.html', form=form, password=password)
+
+@app.route('/pgmd5', methods=['GET', 'POST'])
+def pgmd5():
+    pgmd5 = None
+    form = Pgmd5Form()
+    if form.validate_on_submit():
+        pgmd5 = pgmd5gen(form.pguser.data,form.pgpass.data)
+    return render_template('pgmd5.html', form=form, pgmd5=pgmd5)
