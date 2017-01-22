@@ -6,10 +6,13 @@
   {{ form.hidden_tag() }}
   <div class="form-group">
     {{ form.passlength.label }}
-  <div>
+    <div>
     {{ form.passlength }}
+    </div>
+    <p class="text-danger">{{ form.passlength.errors[0] }}</p>
   </div>
-  <p class="text-danger">{{ form.passlength.errors[0] }}</p>
+  <div>
+    <label class="checkbox-inline">{{ form.alphanumeric_selector }}{{ form.alphanumeric_selector.label }}</label>
   </div>
   <button class="btn btn-primary" type="submit">Generate Password</button>
 </form>
