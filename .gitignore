@@ -2,8 +2,13 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Python virtualenv
 venv
 virtualenv
+
+# Vagrant
+.vagrant
 
 # C extensions
 *.so
